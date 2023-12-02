@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34316.72
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ritossa.DevOpsArtifactsCleaner.WinForm", "Ritossa.DevOpsArtifactsCleaner.WinForm\Ritossa.DevOpsArtifactsCleaner.WinForm.csproj", "{FAC77A78-698D-4400-AC47-744C45B8D323}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ritossa.DevOpsArtifactsCleaner.ApiClient", "Ritossa.DevOpsArtifactsCleaner.ApiClient\Ritossa.DevOpsArtifactsCleaner.ApiClient.csproj", "{BBD1AD60-39ED-42EB-BD53-4224B8351457}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Ritossa.DevOpsArtifactsCleaner.Setup", "Ritossa.DevOpsArtifactsCleaner.Setup\Ritossa.DevOpsArtifactsCleaner.Setup.vdproj", "{BD31A0F6-403F-4AD3-A7DA-E98E845A0E5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ritossa.DevOpsArtifactsCleaner.Services", "Ritossa.DevOpsArtifactsCleaner.Services\Ritossa.DevOpsArtifactsCleaner.Services.csproj", "{A9414E91-05EA-4D91-BEBE-8D0BE8804542}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ritossa.DevOpsArtifactsCleaner.Services.Contracts", "Ritossa.DevOpsArtifactsCleaner.Services.Contracts\Ritossa.DevOpsArtifactsCleaner.Services.Contracts.csproj", "{4A3B80FB-F67B-43B3-8DE0-9BCD3A334800}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FAC77A78-698D-4400-AC47-744C45B8D323}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAC77A78-698D-4400-AC47-744C45B8D323}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAC77A78-698D-4400-AC47-744C45B8D323}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAC77A78-698D-4400-AC47-744C45B8D323}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBD1AD60-39ED-42EB-BD53-4224B8351457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBD1AD60-39ED-42EB-BD53-4224B8351457}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBD1AD60-39ED-42EB-BD53-4224B8351457}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBD1AD60-39ED-42EB-BD53-4224B8351457}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD31A0F6-403F-4AD3-A7DA-E98E845A0E5D}.Debug|Any CPU.ActiveCfg = Debug
+		{BD31A0F6-403F-4AD3-A7DA-E98E845A0E5D}.Release|Any CPU.ActiveCfg = Release
+		{A9414E91-05EA-4D91-BEBE-8D0BE8804542}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9414E91-05EA-4D91-BEBE-8D0BE8804542}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9414E91-05EA-4D91-BEBE-8D0BE8804542}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9414E91-05EA-4D91-BEBE-8D0BE8804542}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A3B80FB-F67B-43B3-8DE0-9BCD3A334800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A3B80FB-F67B-43B3-8DE0-9BCD3A334800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A3B80FB-F67B-43B3-8DE0-9BCD3A334800}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A3B80FB-F67B-43B3-8DE0-9BCD3A334800}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {76D5BF49-6D36-4981-88E0-A25A9328A47D}
+	EndGlobalSection
+EndGlobal

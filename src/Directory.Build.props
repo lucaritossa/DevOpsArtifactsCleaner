@@ -1,0 +1,14 @@
+<Project>
+  <PropertyGroup>
+    <Authors>Luca Ritossa</Authors>
+    <Company>Ritossa</Company>
+    <Product>Ritossa.DevOpsArtifactsCleaner</Product>
+    <Copyright>Copyright © Luca Ritossa 2023</Copyright>
+    <Description>This is a library of DevOps Artifacts Cleaner</Description>
+
+    <PackageDescription>This is a library of DevOps Artifacts Cleaner</PackageDescription>
+    <PackageIcon>images\icon.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/lucaritossa/DevOpsArtifactsCleaner</PackageProjectUrl>
+    <PackageTags>Azure DevOps Artifacts Cleaner</PackageTags>
+  </PropertyGroup>
+</Project>
