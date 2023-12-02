@@ -35,7 +35,7 @@ At first run you have to set the options to correctly communicate with you Azure
 
 A PAT (Personal Access Token) is required to permit DevOps Artifacts Cleaner to correctly communicate via API with Azure DevOps. You have to create one from "Personal access tokens" feature from you Azure DevOps "User settings"
 ![image](https://github.com/lucaritossa/DevOpsArtifactsCleaner/assets/12578097/79c53aec-d241-40b7-af74-99d4a77eedf7)
-<br>
+
 Follow this example to create you PAT. The only **scope** you need is **Packaging's Read&Write**.
 ![image](https://github.com/lucaritossa/DevOpsArtifactsCleaner/assets/12578097/dea6f69b-960c-4e0f-989d-851249d98923)
 
