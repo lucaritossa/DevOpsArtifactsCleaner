@@ -38,3 +38,12 @@ A PAT (Personal Access Token) is required to permit DevOps Artifacts Cleaner to 
 
 Follow this example to create you PAT. The only **scope** you need is **Packaging's Read&Write**.
 ![image](https://github.com/lucaritossa/DevOpsArtifactsCleaner/assets/12578097/dea6f69b-960c-4e0f-989d-851249d98923)
+
+## Support
+DevOps Artifacts Cleaner is open source software maintained by voluntary contributors in their spare time and on a best effort basis.<br>
+Support is provided for the latest version only: please update before submitting any issue.
+
+## License
+
+DevOps Artifacts Cleaner is licensed under the terms of BSD license.<br>
+Please see the [LICENSE file](./LICENSE.md) for further information.
