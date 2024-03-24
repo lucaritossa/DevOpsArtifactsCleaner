@@ -290,9 +290,6 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
                         if (isSuccessful == false)
                             break;
                     }
-
-                    if (isSuccessful && chunks.Count > 1)
-                        toolStripStatusLabel.Text = $"{toDelete.Count} versions deleted";
                 });
 
 
@@ -305,6 +302,9 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
                     MessageBox.Show($"Deleting failed\n\n{message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+
+                MessageBox.Show($"{toDelete.Count} versions deleted", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                toolStripStatusLabel.Text = string.Empty;
             }
             finally
             {
@@ -347,9 +347,6 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
                         if (isSuccessful == false)
                             break;
                     }
-
-                    if (isSuccessful && chunks.Count > 1)
-                        toolStripStatusLabel.Text = $"{toUnlist.Count} versions unlisted";
                 });
 
                 if (!isSuccessful)
@@ -361,6 +358,9 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
                     MessageBox.Show($"Unlisting failed\n\n{message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+
+                MessageBox.Show($"{toUnlist.Count} versions unlisted", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                toolStripStatusLabel.Text = string.Empty;
 
                 SuspendLayout();
 
@@ -423,9 +423,6 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
                         if (isSuccessful == false)
                             break;
                     }
-
-                    if (isSuccessful && chunks.Count > 1)
-                        toolStripStatusLabel.Text = $"{toRelist.Count} versions relisted";
                 });
 
                 if (!isSuccessful)
@@ -437,6 +434,9 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
                     MessageBox.Show($"Relisting failed\n\n{message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+
+                MessageBox.Show($"{toRelist.Count} versions deleted", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                toolStripStatusLabel.Text = string.Empty;
 
                 SuspendLayout();
 
