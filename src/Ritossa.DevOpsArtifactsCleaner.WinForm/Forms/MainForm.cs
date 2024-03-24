@@ -519,6 +519,8 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
                 packagesVersionsBindingSource.DataSource = dataSource;
 
                 FilterPackagesVersionsDataSource();
+
+                packagesVersionsDataGridView.SelectAll();
             }
             finally
             {
