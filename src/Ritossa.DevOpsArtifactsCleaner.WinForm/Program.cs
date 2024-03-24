@@ -2,6 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Ritossa.DevOpsArtifactsCleaner.Services;
 using Ritossa.DevOpsArtifactsCleaner.WinForm.Forms;
+using Ritossa.DevOpsArtifactsCleaner.WinForm.Properties;
 
 namespace Ritossa.DevOpsArtifactsCleaner.WinForm
 {
@@ -21,13 +22,16 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm
             var host = CreateHostBuilder().Build();
             ServiceProvider = host.Services;
 
+            Settings.Default.Upgrade();
+
             Application.Run(ServiceProvider.GetRequiredService<MainForm>());
         }
 
         static IHostBuilder CreateHostBuilder()
         {
             var host = Host.CreateDefaultBuilder()
-                .ConfigureServices((context, services) => {
+                .ConfigureServices((context, services) =>
+                {
                     services.AddTransient<MainForm>();
                     services.AddTransient<AboutBox>();
                     services.AddTransient<OptionsForm>();
