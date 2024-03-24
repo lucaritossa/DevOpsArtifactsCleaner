@@ -467,7 +467,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
 
         private static List<List<PackageVersionModel>> SplitIntoChunks(List<PackageVersionModel> list, int chunkSize)
         {
-            List<List<PackageVersionModel>> chunks = new List<List<PackageVersionModel>>();
+            List<List<PackageVersionModel>> chunks = new();
 
             for (int i = 0; i < list.Count; i += chunkSize)
             {
