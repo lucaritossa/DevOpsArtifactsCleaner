@@ -281,7 +281,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
                 var isSuccessful = false;
                 await Task.Run(() =>
                 {
-                    var chunks = SplitIntoChunks(toDelete, 100);
+                    var chunks = SplitIntoChunks(toDelete);
 
                     foreach (var chunk in chunks)
                     {
@@ -338,7 +338,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
                 var isSuccessful = false;
                 await Task.Run(() =>
                 {
-                    var chunks = SplitIntoChunks(toUnlist, 100);
+                    var chunks = SplitIntoChunks(toUnlist);
 
                     foreach (var chunk in chunks)
                     {
@@ -414,7 +414,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
                 var isSuccessful = false;
                 await Task.Run(() =>
                 {
-                    var chunks = SplitIntoChunks(toRelist, 100);
+                    var chunks = SplitIntoChunks(toRelist);
 
                     foreach (var chunk in chunks)
                     {
@@ -465,7 +465,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             }
         }
 
-        private static List<List<PackageVersionModel>> SplitIntoChunks(List<PackageVersionModel> list, int chunkSize)
+        private static List<List<PackageVersionModel>> SplitIntoChunks(List<PackageVersionModel> list, int chunkSize = 50)
         {
             List<List<PackageVersionModel>> chunks = new();
 
