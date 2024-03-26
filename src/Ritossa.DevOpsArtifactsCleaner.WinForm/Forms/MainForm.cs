@@ -526,16 +526,6 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             tbFilterPackages.Text = string.Empty;
         }
 
-        private void pictureBoxFilterPackages_MouseHover(object sender, EventArgs e)
-        {
-            toolTipFilterIsActive.Show(FILTERED_LIST_MESSAGE, pictureBoxFilterPackages, 1, -75);
-        }
-
-        private void pictureBoxFilterPackages_MouseLeave(object sender, EventArgs e)
-        {
-            toolTipFilterIsActive.Hide(pictureBoxFilterPackages);
-        }
-
         private void FilterMasterDataSource()
         {
             if (masterBindingSource.DataSource is not BindingListView<PackageSourceItem> view) return;
@@ -612,7 +602,19 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
 
             view.Object.Versions.ApplyFilter(_ =>
                 (_.IsPreRelease == cbShowPreRelease.Checked || _.IsOfficialRelease == cbShowOfficialRelease.Checked) &&
-                (_.IsListed == cbShowListed.Checked || _.IsUnlisted == cbShowUnlisted.Checked));
+                (_.IsListed == cbShowListed.Checked || _.IsUnlisted == cbShowUnlisted.Checked) &&
+                _.Version.Contains(tbFilterVersions.Text, StringComparison.InvariantCultureIgnoreCase));
+        }
+
+        private void tbFilterVersions_TextChanged(object sender, EventArgs e)
+        {
+            pictureBoxFilterVersions.Visible = !string.IsNullOrWhiteSpace(tbFilterVersions.Text);
+            FilterDetailsDataSource();
+        }
+
+        private void btnClearFilterVersions_Click(object sender, EventArgs e)
+        {
+            tbFilterVersions.Text = string.Empty;
         }
 
         #endregion
@@ -630,25 +632,31 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             tbFilterPackagesVersions.Text = string.Empty;
         }
 
-        private void pictureBoxFilterPackagesVersions_MouseHover(object sender, EventArgs e)
-        {
-            toolTipFilterIsActive.Show(FILTERED_LIST_MESSAGE, pictureBoxFilterPackagesVersions, 1, -75);
-        }
-
-        private void pictureBoxFilterPackagesVersions_MouseLeave(object sender, EventArgs e)
-        {
-            toolTipFilterIsActive.Hide(pictureBoxFilterPackagesVersions);
-        }
-
         private void FilterPackagesVersionsDataSource()
         {
             if (packagesVersionsBindingSource.DataSource is not BindingListView<PackageVersionModel> view) return;
 
+            SuspendLayout();
+
             view.RemoveFilter();
             view.ApplyFilter(_ => _.Name.Contains(tbFilterPackagesVersions.Text, StringComparison.InvariantCultureIgnoreCase));
+
+            ResumeLayout();
         }
 
         #endregion
+
+        private void pictureBoxFilter_MouseHover(object sender, EventArgs e)
+        {
+            if (sender is not PictureBox pictureBox) return;
+            toolTipFilterIsActive.Show(FILTERED_LIST_MESSAGE, pictureBox, 1, -75);
+        }
+
+        private void pictureBoxFilter_MouseLeave(object sender, EventArgs e)
+        {
+            if (sender is not PictureBox pictureBox) return;
+            toolTipFilterIsActive.Hide(pictureBox);
+        }
 
     }
 }

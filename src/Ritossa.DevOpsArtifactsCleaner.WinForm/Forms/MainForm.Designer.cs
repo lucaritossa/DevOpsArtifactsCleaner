@@ -51,6 +51,15 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             urlDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             masterBindingSource = new BindingSource(components);
             detailsDataGridView = new DataGridView();
+            versionDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            isLatestDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
+            isOfficialReleaseDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
+            isPreReleaseDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
+            isListedDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
+            IsUnlisted = new DataGridViewCheckBoxColumn();
+            publishDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            idDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            storageIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             detailsBindingSource = new BindingSource(components);
             verticalSplitContainer = new SplitContainer();
             packagesGroupBox = new GroupBox();
@@ -59,6 +68,14 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             tbFilterPackages = new TextBox();
             lblFilterPackages = new Label();
             horizontalSplitContainer = new SplitContainer();
+            cbShowUnlisted = new CheckBox();
+            pictureBoxFilterVersions = new PictureBox();
+            cbShowListed = new CheckBox();
+            btnCleanFilterVersions = new Button();
+            tbFilterVersions = new TextBox();
+            cbShowOfficialRelease = new CheckBox();
+            cbShowPreRelease = new CheckBox();
+            lblFilterVersions = new Label();
             sameVersionGroupBox = new GroupBox();
             pictureBoxFilterPackagesVersions = new PictureBox();
             btnRelist = new Button();
@@ -67,13 +84,21 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             tbFilterPackagesVersions = new TextBox();
             lblFilterPackagesVersions = new Label();
             packagesVersionsDataGridView = new DataGridView();
+            versionDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            nameDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            isLatestDataGridViewCheckBoxColumn1 = new DataGridViewCheckBoxColumn();
+            isOfficialReleaseDataGridViewCheckBoxColumn1 = new DataGridViewCheckBoxColumn();
+            isPreReleaseDataGridViewCheckBoxColumn1 = new DataGridViewCheckBoxColumn();
+            isListedDataGridViewCheckBoxColumn1 = new DataGridViewCheckBoxColumn();
+            isUnlistedDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
+            publishDateDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            packageIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            versionIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            storageIdDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            protocolTypeDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             packagesVersionsBindingSource = new BindingSource(components);
             detailsGroupBox = new GroupBox();
-            cbShowUnlisted = new CheckBox();
-            cbShowListed = new CheckBox();
             tbPackageName = new TextBox();
-            cbShowOfficialRelease = new CheckBox();
-            cbShowPreRelease = new CheckBox();
             lblVersionsCount = new Label();
             lblVersions = new Label();
             lblPackage = new Label();
@@ -90,27 +115,6 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             optionsToolStripMenuItem = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
-            versionDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            nameDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            isLatestDataGridViewCheckBoxColumn1 = new DataGridViewCheckBoxColumn();
-            isOfficialReleaseDataGridViewCheckBoxColumn1 = new DataGridViewCheckBoxColumn();
-            isPreReleaseDataGridViewCheckBoxColumn1 = new DataGridViewCheckBoxColumn();
-            isListedDataGridViewCheckBoxColumn1 = new DataGridViewCheckBoxColumn();
-            isUnlistedDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
-            publishDateDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            packageIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            versionIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            storageIdDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            protocolTypeDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            versionDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            isLatestDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
-            isOfficialReleaseDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
-            isPreReleaseDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
-            isListedDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
-            IsUnlisted = new DataGridViewCheckBoxColumn();
-            publishDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            idDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            storageIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             parametersGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)masterDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)masterBindingSource).BeginInit();
@@ -126,6 +130,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             horizontalSplitContainer.Panel1.SuspendLayout();
             horizontalSplitContainer.Panel2.SuspendLayout();
             horizontalSplitContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxFilterVersions).BeginInit();
             sameVersionGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxFilterPackagesVersions).BeginInit();
             ((System.ComponentModel.ISupportInitialize)packagesVersionsDataGridView).BeginInit();
@@ -139,7 +144,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             // 
             btnUnlist.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnUnlist.Enabled = false;
-            btnUnlist.Location = new Point(698, 293);
+            btnUnlist.Location = new Point(698, 310);
             btnUnlist.Name = "btnUnlist";
             btnUnlist.Size = new Size(75, 23);
             btnUnlist.TabIndex = 9;
@@ -334,13 +339,89 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             detailsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             detailsDataGridView.Columns.AddRange(new DataGridViewColumn[] { versionDataGridViewTextBoxColumn, isLatestDataGridViewCheckBoxColumn, isOfficialReleaseDataGridViewCheckBoxColumn, isPreReleaseDataGridViewCheckBoxColumn, isListedDataGridViewCheckBoxColumn, IsUnlisted, publishDateDataGridViewTextBoxColumn, idDataGridViewTextBoxColumn1, storageIdDataGridViewTextBoxColumn });
             detailsDataGridView.DataSource = detailsBindingSource;
-            detailsDataGridView.Location = new Point(7, 0);
+            detailsDataGridView.Location = new Point(7, 60);
             detailsDataGridView.Name = "detailsDataGridView";
             detailsDataGridView.ReadOnly = true;
             detailsDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            detailsDataGridView.Size = new Size(847, 313);
+            detailsDataGridView.Size = new Size(847, 269);
             detailsDataGridView.TabIndex = 13;
             detailsDataGridView.SelectionChanged += detailsDataGridView_SelectionChanged;
+            // 
+            // versionDataGridViewTextBoxColumn
+            // 
+            versionDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            versionDataGridViewTextBoxColumn.DataPropertyName = "Version";
+            versionDataGridViewTextBoxColumn.HeaderText = "Version";
+            versionDataGridViewTextBoxColumn.Name = "versionDataGridViewTextBoxColumn";
+            versionDataGridViewTextBoxColumn.ReadOnly = true;
+            versionDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // isLatestDataGridViewCheckBoxColumn
+            // 
+            isLatestDataGridViewCheckBoxColumn.DataPropertyName = "IsLatest";
+            isLatestDataGridViewCheckBoxColumn.HeaderText = "Latest";
+            isLatestDataGridViewCheckBoxColumn.Name = "isLatestDataGridViewCheckBoxColumn";
+            isLatestDataGridViewCheckBoxColumn.ReadOnly = true;
+            isLatestDataGridViewCheckBoxColumn.Width = 44;
+            // 
+            // isOfficialReleaseDataGridViewCheckBoxColumn
+            // 
+            isOfficialReleaseDataGridViewCheckBoxColumn.DataPropertyName = "IsOfficialRelease";
+            isOfficialReleaseDataGridViewCheckBoxColumn.HeaderText = "Official";
+            isOfficialReleaseDataGridViewCheckBoxColumn.Name = "isOfficialReleaseDataGridViewCheckBoxColumn";
+            isOfficialReleaseDataGridViewCheckBoxColumn.ReadOnly = true;
+            isOfficialReleaseDataGridViewCheckBoxColumn.Width = 51;
+            // 
+            // isPreReleaseDataGridViewCheckBoxColumn
+            // 
+            isPreReleaseDataGridViewCheckBoxColumn.DataPropertyName = "IsPreRelease";
+            isPreReleaseDataGridViewCheckBoxColumn.HeaderText = "Pre-Release";
+            isPreReleaseDataGridViewCheckBoxColumn.Name = "isPreReleaseDataGridViewCheckBoxColumn";
+            isPreReleaseDataGridViewCheckBoxColumn.ReadOnly = true;
+            isPreReleaseDataGridViewCheckBoxColumn.Width = 74;
+            // 
+            // isListedDataGridViewCheckBoxColumn
+            // 
+            isListedDataGridViewCheckBoxColumn.DataPropertyName = "IsListed";
+            isListedDataGridViewCheckBoxColumn.HeaderText = "Listed";
+            isListedDataGridViewCheckBoxColumn.Name = "isListedDataGridViewCheckBoxColumn";
+            isListedDataGridViewCheckBoxColumn.ReadOnly = true;
+            isListedDataGridViewCheckBoxColumn.Width = 44;
+            // 
+            // IsUnlisted
+            // 
+            IsUnlisted.DataPropertyName = "IsUnlisted";
+            IsUnlisted.HeaderText = "Unlisted";
+            IsUnlisted.Name = "IsUnlisted";
+            IsUnlisted.ReadOnly = true;
+            IsUnlisted.Width = 56;
+            // 
+            // publishDateDataGridViewTextBoxColumn
+            // 
+            publishDateDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            publishDateDataGridViewTextBoxColumn.DataPropertyName = "PublishDate";
+            publishDateDataGridViewTextBoxColumn.HeaderText = "Publish Date";
+            publishDateDataGridViewTextBoxColumn.Name = "publishDateDataGridViewTextBoxColumn";
+            publishDateDataGridViewTextBoxColumn.ReadOnly = true;
+            publishDateDataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // idDataGridViewTextBoxColumn1
+            // 
+            idDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            idDataGridViewTextBoxColumn1.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn1.HeaderText = "Id";
+            idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
+            idDataGridViewTextBoxColumn1.ReadOnly = true;
+            idDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // storageIdDataGridViewTextBoxColumn
+            // 
+            storageIdDataGridViewTextBoxColumn.DataPropertyName = "StorageId";
+            storageIdDataGridViewTextBoxColumn.HeaderText = "StorageId";
+            storageIdDataGridViewTextBoxColumn.Name = "storageIdDataGridViewTextBoxColumn";
+            storageIdDataGridViewTextBoxColumn.ReadOnly = true;
+            storageIdDataGridViewTextBoxColumn.Visible = false;
+            storageIdDataGridViewTextBoxColumn.Width = 82;
             // 
             // detailsBindingSource
             // 
@@ -391,8 +472,8 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             pictureBoxFilterPackages.TabIndex = 20;
             pictureBoxFilterPackages.TabStop = false;
             pictureBoxFilterPackages.Visible = false;
-            pictureBoxFilterPackages.MouseLeave += pictureBoxFilterPackages_MouseLeave;
-            pictureBoxFilterPackages.MouseHover += pictureBoxFilterPackages_MouseHover;
+            pictureBoxFilterPackages.MouseLeave += pictureBoxFilter_MouseLeave;
+            pictureBoxFilterPackages.MouseHover += pictureBoxFilter_MouseHover;
             // 
             // btnClearFilterPackages
             // 
@@ -406,9 +487,9 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             // 
             // tbFilterPackages
             // 
-            tbFilterPackages.Location = new Point(51, 18);
+            tbFilterPackages.Location = new Point(102, 18);
             tbFilterPackages.Name = "tbFilterPackages";
-            tbFilterPackages.Size = new Size(309, 23);
+            tbFilterPackages.Size = new Size(258, 23);
             tbFilterPackages.TabIndex = 17;
             tbFilterPackages.TextChanged += tbFilterPackages_TextChanged;
             // 
@@ -417,27 +498,132 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             lblFilterPackages.AutoSize = true;
             lblFilterPackages.Location = new Point(9, 21);
             lblFilterPackages.Name = "lblFilterPackages";
-            lblFilterPackages.Size = new Size(36, 15);
+            lblFilterPackages.Size = new Size(87, 15);
             lblFilterPackages.TabIndex = 16;
-            lblFilterPackages.Text = "Filter:";
+            lblFilterPackages.Text = "Filter by Name:";
             // 
             // horizontalSplitContainer
             // 
             horizontalSplitContainer.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            horizontalSplitContainer.Location = new Point(3, 115);
+            horizontalSplitContainer.Location = new Point(3, 82);
             horizontalSplitContainer.Name = "horizontalSplitContainer";
             horizontalSplitContainer.Orientation = Orientation.Horizontal;
             // 
             // horizontalSplitContainer.Panel1
             // 
+            horizontalSplitContainer.Panel1.Controls.Add(cbShowUnlisted);
+            horizontalSplitContainer.Panel1.Controls.Add(pictureBoxFilterVersions);
+            horizontalSplitContainer.Panel1.Controls.Add(cbShowListed);
+            horizontalSplitContainer.Panel1.Controls.Add(btnCleanFilterVersions);
+            horizontalSplitContainer.Panel1.Controls.Add(tbFilterVersions);
+            horizontalSplitContainer.Panel1.Controls.Add(cbShowOfficialRelease);
+            horizontalSplitContainer.Panel1.Controls.Add(cbShowPreRelease);
+            horizontalSplitContainer.Panel1.Controls.Add(lblFilterVersions);
             horizontalSplitContainer.Panel1.Controls.Add(detailsDataGridView);
             // 
             // horizontalSplitContainer.Panel2
             // 
             horizontalSplitContainer.Panel2.Controls.Add(sameVersionGroupBox);
-            horizontalSplitContainer.Size = new Size(861, 647);
-            horizontalSplitContainer.SplitterDistance = 321;
+            horizontalSplitContainer.Size = new Size(861, 680);
+            horizontalSplitContainer.SplitterDistance = 337;
             horizontalSplitContainer.TabIndex = 24;
+            // 
+            // cbShowUnlisted
+            // 
+            cbShowUnlisted.AutoSize = true;
+            cbShowUnlisted.Checked = true;
+            cbShowUnlisted.CheckState = CheckState.Checked;
+            cbShowUnlisted.Location = new Point(392, 35);
+            cbShowUnlisted.Name = "cbShowUnlisted";
+            cbShowUnlisted.RightToLeft = RightToLeft.Yes;
+            cbShowUnlisted.Size = new Size(101, 19);
+            cbShowUnlisted.TabIndex = 24;
+            cbShowUnlisted.Text = "Show Unlisted";
+            cbShowUnlisted.UseVisualStyleBackColor = true;
+            cbShowUnlisted.CheckedChanged += cbShowUnlisted_CheckedChanged;
+            // 
+            // pictureBoxFilterVersions
+            // 
+            pictureBoxFilterVersions.Image = Properties.Resources.icons8_warning_48;
+            pictureBoxFilterVersions.InitialImage = Properties.Resources.icons8_warning_48;
+            pictureBoxFilterVersions.Location = new Point(433, 6);
+            pictureBoxFilterVersions.Name = "pictureBoxFilterVersions";
+            pictureBoxFilterVersions.Size = new Size(23, 23);
+            pictureBoxFilterVersions.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBoxFilterVersions.TabIndex = 25;
+            pictureBoxFilterVersions.TabStop = false;
+            pictureBoxFilterVersions.Visible = false;
+            pictureBoxFilterVersions.MouseLeave += pictureBoxFilter_MouseLeave;
+            pictureBoxFilterVersions.MouseHover += pictureBoxFilter_MouseHover;
+            // 
+            // cbShowListed
+            // 
+            cbShowListed.AutoSize = true;
+            cbShowListed.Checked = true;
+            cbShowListed.CheckState = CheckState.Checked;
+            cbShowListed.Location = new Point(297, 35);
+            cbShowListed.Name = "cbShowListed";
+            cbShowListed.RightToLeft = RightToLeft.Yes;
+            cbShowListed.Size = new Size(89, 19);
+            cbShowListed.TabIndex = 23;
+            cbShowListed.Text = "Show Listed";
+            cbShowListed.UseVisualStyleBackColor = true;
+            cbShowListed.CheckedChanged += cbShowListed_CheckedChanged;
+            // 
+            // btnCleanFilterVersions
+            // 
+            btnCleanFilterVersions.Location = new Point(408, 6);
+            btnCleanFilterVersions.Name = "btnCleanFilterVersions";
+            btnCleanFilterVersions.Size = new Size(19, 23);
+            btnCleanFilterVersions.TabIndex = 24;
+            btnCleanFilterVersions.Text = "X";
+            btnCleanFilterVersions.UseVisualStyleBackColor = true;
+            btnCleanFilterVersions.Click += btnClearFilterVersions_Click;
+            // 
+            // tbFilterVersions
+            // 
+            tbFilterVersions.Location = new Point(104, 6);
+            tbFilterVersions.Name = "tbFilterVersions";
+            tbFilterVersions.Size = new Size(309, 23);
+            tbFilterVersions.TabIndex = 23;
+            tbFilterVersions.TextChanged += tbFilterVersions_TextChanged;
+            // 
+            // cbShowOfficialRelease
+            // 
+            cbShowOfficialRelease.AutoSize = true;
+            cbShowOfficialRelease.Checked = true;
+            cbShowOfficialRelease.CheckState = CheckState.Checked;
+            cbShowOfficialRelease.Location = new Point(8, 35);
+            cbShowOfficialRelease.Name = "cbShowOfficialRelease";
+            cbShowOfficialRelease.RightToLeft = RightToLeft.Yes;
+            cbShowOfficialRelease.Size = new Size(138, 19);
+            cbShowOfficialRelease.TabIndex = 18;
+            cbShowOfficialRelease.Text = "Show Official Release";
+            cbShowOfficialRelease.UseVisualStyleBackColor = true;
+            cbShowOfficialRelease.CheckedChanged += cbShowOfficialRelease_CheckedChanged;
+            // 
+            // cbShowPreRelease
+            // 
+            cbShowPreRelease.AutoSize = true;
+            cbShowPreRelease.Checked = true;
+            cbShowPreRelease.CheckState = CheckState.Checked;
+            cbShowPreRelease.Location = new Point(152, 35);
+            cbShowPreRelease.Name = "cbShowPreRelease";
+            cbShowPreRelease.RightToLeft = RightToLeft.Yes;
+            cbShowPreRelease.Size = new Size(119, 19);
+            cbShowPreRelease.TabIndex = 19;
+            cbShowPreRelease.Text = "Show Pre-Release";
+            cbShowPreRelease.UseVisualStyleBackColor = true;
+            cbShowPreRelease.CheckedChanged += cbShowPreRelease_CheckedChanged;
+            // 
+            // lblFilterVersions
+            // 
+            lblFilterVersions.AutoSize = true;
+            lblFilterVersions.Location = new Point(6, 9);
+            lblFilterVersions.Name = "lblFilterVersions";
+            lblFilterVersions.Size = new Size(93, 15);
+            lblFilterVersions.TabIndex = 22;
+            lblFilterVersions.Text = "Filter by Version:";
             // 
             // sameVersionGroupBox
             // 
@@ -452,7 +638,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             sameVersionGroupBox.Controls.Add(packagesVersionsDataGridView);
             sameVersionGroupBox.Location = new Point(0, 3);
             sameVersionGroupBox.Name = "sameVersionGroupBox";
-            sameVersionGroupBox.Size = new Size(861, 319);
+            sameVersionGroupBox.Size = new Size(861, 336);
             sameVersionGroupBox.TabIndex = 23;
             sameVersionGroupBox.TabStop = false;
             sameVersionGroupBox.Text = "All packages with selected version(s)";
@@ -461,21 +647,21 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             // 
             pictureBoxFilterPackagesVersions.Image = Properties.Resources.icons8_warning_48;
             pictureBoxFilterPackagesVersions.InitialImage = Properties.Resources.icons8_warning_48;
-            pictureBoxFilterPackagesVersions.Location = new Point(378, 19);
+            pictureBoxFilterPackagesVersions.Location = new Point(423, 19);
             pictureBoxFilterPackagesVersions.Name = "pictureBoxFilterPackagesVersions";
             pictureBoxFilterPackagesVersions.Size = new Size(23, 23);
             pictureBoxFilterPackagesVersions.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBoxFilterPackagesVersions.TabIndex = 21;
             pictureBoxFilterPackagesVersions.TabStop = false;
             pictureBoxFilterPackagesVersions.Visible = false;
-            pictureBoxFilterPackagesVersions.MouseLeave += pictureBoxFilterPackagesVersions_MouseLeave;
-            pictureBoxFilterPackagesVersions.MouseHover += pictureBoxFilterPackagesVersions_MouseHover;
+            pictureBoxFilterPackagesVersions.MouseLeave += pictureBoxFilter_MouseLeave;
+            pictureBoxFilterPackagesVersions.MouseHover += pictureBoxFilter_MouseHover;
             // 
             // btnRelist
             // 
             btnRelist.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnRelist.Enabled = false;
-            btnRelist.Location = new Point(617, 293);
+            btnRelist.Location = new Point(617, 310);
             btnRelist.Name = "btnRelist";
             btnRelist.Size = new Size(75, 23);
             btnRelist.TabIndex = 16;
@@ -485,7 +671,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             // 
             // btnCleanFilterPackagesVersions
             // 
-            btnCleanFilterPackagesVersions.Location = new Point(353, 19);
+            btnCleanFilterPackagesVersions.Location = new Point(398, 19);
             btnCleanFilterPackagesVersions.Name = "btnCleanFilterPackagesVersions";
             btnCleanFilterPackagesVersions.Size = new Size(19, 23);
             btnCleanFilterPackagesVersions.TabIndex = 20;
@@ -497,7 +683,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             // 
             btnDelete.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnDelete.Enabled = false;
-            btnDelete.Location = new Point(779, 293);
+            btnDelete.Location = new Point(779, 310);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(75, 23);
             btnDelete.TabIndex = 15;
@@ -507,7 +693,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             // 
             // tbFilterPackagesVersions
             // 
-            tbFilterPackagesVersions.Location = new Point(49, 19);
+            tbFilterPackagesVersions.Location = new Point(94, 19);
             tbFilterPackagesVersions.Name = "tbFilterPackagesVersions";
             tbFilterPackagesVersions.Size = new Size(309, 23);
             tbFilterPackagesVersions.TabIndex = 2;
@@ -518,9 +704,9 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             lblFilterPackagesVersions.AutoSize = true;
             lblFilterPackagesVersions.Location = new Point(6, 22);
             lblFilterPackagesVersions.Name = "lblFilterPackagesVersions";
-            lblFilterPackagesVersions.Size = new Size(36, 15);
+            lblFilterPackagesVersions.Size = new Size(87, 15);
             lblFilterPackagesVersions.TabIndex = 1;
-            lblFilterPackagesVersions.Text = "Filter:";
+            lblFilterPackagesVersions.Text = "Filter by Name:";
             // 
             // packagesVersionsDataGridView
             // 
@@ -536,8 +722,116 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             packagesVersionsDataGridView.Name = "packagesVersionsDataGridView";
             packagesVersionsDataGridView.ReadOnly = true;
             packagesVersionsDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            packagesVersionsDataGridView.Size = new Size(847, 239);
+            packagesVersionsDataGridView.Size = new Size(847, 256);
             packagesVersionsDataGridView.TabIndex = 0;
+            // 
+            // versionDataGridViewTextBoxColumn1
+            // 
+            versionDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            versionDataGridViewTextBoxColumn1.DataPropertyName = "Version";
+            versionDataGridViewTextBoxColumn1.HeaderText = "Version";
+            versionDataGridViewTextBoxColumn1.MinimumWidth = 100;
+            versionDataGridViewTextBoxColumn1.Name = "versionDataGridViewTextBoxColumn1";
+            versionDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // nameDataGridViewTextBoxColumn1
+            // 
+            nameDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            nameDataGridViewTextBoxColumn1.DataPropertyName = "Name";
+            nameDataGridViewTextBoxColumn1.HeaderText = "Name";
+            nameDataGridViewTextBoxColumn1.MinimumWidth = 150;
+            nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
+            nameDataGridViewTextBoxColumn1.ReadOnly = true;
+            nameDataGridViewTextBoxColumn1.Width = 150;
+            // 
+            // isLatestDataGridViewCheckBoxColumn1
+            // 
+            isLatestDataGridViewCheckBoxColumn1.DataPropertyName = "IsLatest";
+            isLatestDataGridViewCheckBoxColumn1.HeaderText = "Latest";
+            isLatestDataGridViewCheckBoxColumn1.MinimumWidth = 50;
+            isLatestDataGridViewCheckBoxColumn1.Name = "isLatestDataGridViewCheckBoxColumn1";
+            isLatestDataGridViewCheckBoxColumn1.ReadOnly = true;
+            isLatestDataGridViewCheckBoxColumn1.Width = 80;
+            // 
+            // isOfficialReleaseDataGridViewCheckBoxColumn1
+            // 
+            isOfficialReleaseDataGridViewCheckBoxColumn1.DataPropertyName = "IsOfficialRelease";
+            isOfficialReleaseDataGridViewCheckBoxColumn1.HeaderText = "Official";
+            isOfficialReleaseDataGridViewCheckBoxColumn1.MinimumWidth = 50;
+            isOfficialReleaseDataGridViewCheckBoxColumn1.Name = "isOfficialReleaseDataGridViewCheckBoxColumn1";
+            isOfficialReleaseDataGridViewCheckBoxColumn1.ReadOnly = true;
+            isOfficialReleaseDataGridViewCheckBoxColumn1.Width = 80;
+            // 
+            // isPreReleaseDataGridViewCheckBoxColumn1
+            // 
+            isPreReleaseDataGridViewCheckBoxColumn1.DataPropertyName = "IsPreRelease";
+            isPreReleaseDataGridViewCheckBoxColumn1.HeaderText = "Pre-Release";
+            isPreReleaseDataGridViewCheckBoxColumn1.MinimumWidth = 80;
+            isPreReleaseDataGridViewCheckBoxColumn1.Name = "isPreReleaseDataGridViewCheckBoxColumn1";
+            isPreReleaseDataGridViewCheckBoxColumn1.ReadOnly = true;
+            isPreReleaseDataGridViewCheckBoxColumn1.Width = 80;
+            // 
+            // isListedDataGridViewCheckBoxColumn1
+            // 
+            isListedDataGridViewCheckBoxColumn1.DataPropertyName = "IsListed";
+            isListedDataGridViewCheckBoxColumn1.HeaderText = "Listed";
+            isListedDataGridViewCheckBoxColumn1.MinimumWidth = 50;
+            isListedDataGridViewCheckBoxColumn1.Name = "isListedDataGridViewCheckBoxColumn1";
+            isListedDataGridViewCheckBoxColumn1.ReadOnly = true;
+            isListedDataGridViewCheckBoxColumn1.Width = 80;
+            // 
+            // isUnlistedDataGridViewCheckBoxColumn
+            // 
+            isUnlistedDataGridViewCheckBoxColumn.DataPropertyName = "IsUnlisted";
+            isUnlistedDataGridViewCheckBoxColumn.HeaderText = "Unlisted";
+            isUnlistedDataGridViewCheckBoxColumn.MinimumWidth = 50;
+            isUnlistedDataGridViewCheckBoxColumn.Name = "isUnlistedDataGridViewCheckBoxColumn";
+            isUnlistedDataGridViewCheckBoxColumn.ReadOnly = true;
+            isUnlistedDataGridViewCheckBoxColumn.Width = 80;
+            // 
+            // publishDateDataGridViewTextBoxColumn1
+            // 
+            publishDateDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            publishDateDataGridViewTextBoxColumn1.DataPropertyName = "PublishDate";
+            publishDateDataGridViewTextBoxColumn1.HeaderText = "Publish Date";
+            publishDateDataGridViewTextBoxColumn1.MinimumWidth = 100;
+            publishDateDataGridViewTextBoxColumn1.Name = "publishDateDataGridViewTextBoxColumn1";
+            publishDateDataGridViewTextBoxColumn1.ReadOnly = true;
+            publishDateDataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // packageIdDataGridViewTextBoxColumn
+            // 
+            packageIdDataGridViewTextBoxColumn.DataPropertyName = "PackageId";
+            packageIdDataGridViewTextBoxColumn.HeaderText = "PackageId";
+            packageIdDataGridViewTextBoxColumn.Name = "packageIdDataGridViewTextBoxColumn";
+            packageIdDataGridViewTextBoxColumn.ReadOnly = true;
+            packageIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // versionIdDataGridViewTextBoxColumn
+            // 
+            versionIdDataGridViewTextBoxColumn.DataPropertyName = "VersionId";
+            versionIdDataGridViewTextBoxColumn.HeaderText = "VersionId";
+            versionIdDataGridViewTextBoxColumn.Name = "versionIdDataGridViewTextBoxColumn";
+            versionIdDataGridViewTextBoxColumn.ReadOnly = true;
+            versionIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // storageIdDataGridViewTextBoxColumn1
+            // 
+            storageIdDataGridViewTextBoxColumn1.DataPropertyName = "StorageId";
+            storageIdDataGridViewTextBoxColumn1.HeaderText = "StorageId";
+            storageIdDataGridViewTextBoxColumn1.Name = "storageIdDataGridViewTextBoxColumn1";
+            storageIdDataGridViewTextBoxColumn1.ReadOnly = true;
+            storageIdDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // protocolTypeDataGridViewTextBoxColumn1
+            // 
+            protocolTypeDataGridViewTextBoxColumn1.DataPropertyName = "ProtocolType";
+            protocolTypeDataGridViewTextBoxColumn1.HeaderText = "Protocol Type";
+            protocolTypeDataGridViewTextBoxColumn1.MinimumWidth = 50;
+            protocolTypeDataGridViewTextBoxColumn1.Name = "protocolTypeDataGridViewTextBoxColumn1";
+            protocolTypeDataGridViewTextBoxColumn1.ReadOnly = true;
+            protocolTypeDataGridViewTextBoxColumn1.Visible = false;
+            protocolTypeDataGridViewTextBoxColumn1.Width = 50;
             // 
             // packagesVersionsBindingSource
             // 
@@ -546,48 +840,16 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             // detailsGroupBox
             // 
             detailsGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            detailsGroupBox.Controls.Add(cbShowUnlisted);
-            detailsGroupBox.Controls.Add(cbShowListed);
             detailsGroupBox.Controls.Add(tbPackageName);
-            detailsGroupBox.Controls.Add(cbShowOfficialRelease);
-            detailsGroupBox.Controls.Add(cbShowPreRelease);
             detailsGroupBox.Controls.Add(lblVersionsCount);
             detailsGroupBox.Controls.Add(lblVersions);
             detailsGroupBox.Controls.Add(lblPackage);
             detailsGroupBox.Location = new Point(3, 3);
             detailsGroupBox.Name = "detailsGroupBox";
-            detailsGroupBox.Size = new Size(861, 106);
+            detailsGroupBox.Size = new Size(861, 73);
             detailsGroupBox.TabIndex = 22;
             detailsGroupBox.TabStop = false;
             detailsGroupBox.Text = "Details";
-            // 
-            // cbShowUnlisted
-            // 
-            cbShowUnlisted.AutoSize = true;
-            cbShowUnlisted.Checked = true;
-            cbShowUnlisted.CheckState = CheckState.Checked;
-            cbShowUnlisted.Location = new Point(391, 75);
-            cbShowUnlisted.Name = "cbShowUnlisted";
-            cbShowUnlisted.RightToLeft = RightToLeft.Yes;
-            cbShowUnlisted.Size = new Size(101, 19);
-            cbShowUnlisted.TabIndex = 24;
-            cbShowUnlisted.Text = "Show Unlisted";
-            cbShowUnlisted.UseVisualStyleBackColor = true;
-            cbShowUnlisted.CheckedChanged += cbShowUnlisted_CheckedChanged;
-            // 
-            // cbShowListed
-            // 
-            cbShowListed.AutoSize = true;
-            cbShowListed.Checked = true;
-            cbShowListed.CheckState = CheckState.Checked;
-            cbShowListed.Location = new Point(296, 75);
-            cbShowListed.Name = "cbShowListed";
-            cbShowListed.RightToLeft = RightToLeft.Yes;
-            cbShowListed.Size = new Size(89, 19);
-            cbShowListed.TabIndex = 23;
-            cbShowListed.Text = "Show Listed";
-            cbShowListed.UseVisualStyleBackColor = true;
-            cbShowListed.CheckedChanged += cbShowListed_CheckedChanged;
             // 
             // tbPackageName
             // 
@@ -598,34 +860,6 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             tbPackageName.ReadOnly = true;
             tbPackageName.Size = new Size(789, 23);
             tbPackageName.TabIndex = 22;
-            // 
-            // cbShowOfficialRelease
-            // 
-            cbShowOfficialRelease.AutoSize = true;
-            cbShowOfficialRelease.Checked = true;
-            cbShowOfficialRelease.CheckState = CheckState.Checked;
-            cbShowOfficialRelease.Location = new Point(7, 75);
-            cbShowOfficialRelease.Name = "cbShowOfficialRelease";
-            cbShowOfficialRelease.RightToLeft = RightToLeft.Yes;
-            cbShowOfficialRelease.Size = new Size(138, 19);
-            cbShowOfficialRelease.TabIndex = 18;
-            cbShowOfficialRelease.Text = "Show Official Release";
-            cbShowOfficialRelease.UseVisualStyleBackColor = true;
-            cbShowOfficialRelease.CheckedChanged += cbShowOfficialRelease_CheckedChanged;
-            // 
-            // cbShowPreRelease
-            // 
-            cbShowPreRelease.AutoSize = true;
-            cbShowPreRelease.Checked = true;
-            cbShowPreRelease.CheckState = CheckState.Checked;
-            cbShowPreRelease.Location = new Point(151, 75);
-            cbShowPreRelease.Name = "cbShowPreRelease";
-            cbShowPreRelease.RightToLeft = RightToLeft.Yes;
-            cbShowPreRelease.Size = new Size(119, 19);
-            cbShowPreRelease.TabIndex = 19;
-            cbShowPreRelease.Text = "Show Pre-Release";
-            cbShowPreRelease.UseVisualStyleBackColor = true;
-            cbShowPreRelease.CheckedChanged += cbShowPreRelease_CheckedChanged;
             // 
             // lblVersionsCount
             // 
@@ -748,190 +982,6 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             aboutToolStripMenuItem.Text = "About";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
-            // versionDataGridViewTextBoxColumn1
-            // 
-            versionDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            versionDataGridViewTextBoxColumn1.DataPropertyName = "Version";
-            versionDataGridViewTextBoxColumn1.HeaderText = "Version";
-            versionDataGridViewTextBoxColumn1.MinimumWidth = 100;
-            versionDataGridViewTextBoxColumn1.Name = "versionDataGridViewTextBoxColumn1";
-            versionDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // nameDataGridViewTextBoxColumn1
-            // 
-            nameDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            nameDataGridViewTextBoxColumn1.DataPropertyName = "Name";
-            nameDataGridViewTextBoxColumn1.HeaderText = "Name";
-            nameDataGridViewTextBoxColumn1.MinimumWidth = 150;
-            nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
-            nameDataGridViewTextBoxColumn1.ReadOnly = true;
-            nameDataGridViewTextBoxColumn1.Width = 150;
-            // 
-            // isLatestDataGridViewCheckBoxColumn1
-            // 
-            isLatestDataGridViewCheckBoxColumn1.DataPropertyName = "IsLatest";
-            isLatestDataGridViewCheckBoxColumn1.HeaderText = "Latest";
-            isLatestDataGridViewCheckBoxColumn1.MinimumWidth = 50;
-            isLatestDataGridViewCheckBoxColumn1.Name = "isLatestDataGridViewCheckBoxColumn1";
-            isLatestDataGridViewCheckBoxColumn1.ReadOnly = true;
-            isLatestDataGridViewCheckBoxColumn1.Width = 80;
-            // 
-            // isOfficialReleaseDataGridViewCheckBoxColumn1
-            // 
-            isOfficialReleaseDataGridViewCheckBoxColumn1.DataPropertyName = "IsOfficialRelease";
-            isOfficialReleaseDataGridViewCheckBoxColumn1.HeaderText = "Official";
-            isOfficialReleaseDataGridViewCheckBoxColumn1.MinimumWidth = 50;
-            isOfficialReleaseDataGridViewCheckBoxColumn1.Name = "isOfficialReleaseDataGridViewCheckBoxColumn1";
-            isOfficialReleaseDataGridViewCheckBoxColumn1.ReadOnly = true;
-            isOfficialReleaseDataGridViewCheckBoxColumn1.Width = 80;
-            // 
-            // isPreReleaseDataGridViewCheckBoxColumn1
-            // 
-            isPreReleaseDataGridViewCheckBoxColumn1.DataPropertyName = "IsPreRelease";
-            isPreReleaseDataGridViewCheckBoxColumn1.HeaderText = "Pre-Release";
-            isPreReleaseDataGridViewCheckBoxColumn1.MinimumWidth = 80;
-            isPreReleaseDataGridViewCheckBoxColumn1.Name = "isPreReleaseDataGridViewCheckBoxColumn1";
-            isPreReleaseDataGridViewCheckBoxColumn1.ReadOnly = true;
-            isPreReleaseDataGridViewCheckBoxColumn1.Width = 80;
-            // 
-            // isListedDataGridViewCheckBoxColumn1
-            // 
-            isListedDataGridViewCheckBoxColumn1.DataPropertyName = "IsListed";
-            isListedDataGridViewCheckBoxColumn1.HeaderText = "Listed";
-            isListedDataGridViewCheckBoxColumn1.MinimumWidth = 50;
-            isListedDataGridViewCheckBoxColumn1.Name = "isListedDataGridViewCheckBoxColumn1";
-            isListedDataGridViewCheckBoxColumn1.ReadOnly = true;
-            isListedDataGridViewCheckBoxColumn1.Width = 80;
-            // 
-            // isUnlistedDataGridViewCheckBoxColumn
-            // 
-            isUnlistedDataGridViewCheckBoxColumn.DataPropertyName = "IsUnlisted";
-            isUnlistedDataGridViewCheckBoxColumn.HeaderText = "Unlisted";
-            isUnlistedDataGridViewCheckBoxColumn.MinimumWidth = 50;
-            isUnlistedDataGridViewCheckBoxColumn.Name = "isUnlistedDataGridViewCheckBoxColumn";
-            isUnlistedDataGridViewCheckBoxColumn.ReadOnly = true;
-            isUnlistedDataGridViewCheckBoxColumn.Width = 80;
-            // 
-            // publishDateDataGridViewTextBoxColumn1
-            // 
-            publishDateDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            publishDateDataGridViewTextBoxColumn1.DataPropertyName = "PublishDate";
-            publishDateDataGridViewTextBoxColumn1.HeaderText = "Publish Date";
-            publishDateDataGridViewTextBoxColumn1.MinimumWidth = 100;
-            publishDateDataGridViewTextBoxColumn1.Name = "publishDateDataGridViewTextBoxColumn1";
-            publishDateDataGridViewTextBoxColumn1.ReadOnly = true;
-            publishDateDataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // packageIdDataGridViewTextBoxColumn
-            // 
-            packageIdDataGridViewTextBoxColumn.DataPropertyName = "PackageId";
-            packageIdDataGridViewTextBoxColumn.HeaderText = "PackageId";
-            packageIdDataGridViewTextBoxColumn.Name = "packageIdDataGridViewTextBoxColumn";
-            packageIdDataGridViewTextBoxColumn.ReadOnly = true;
-            packageIdDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // versionIdDataGridViewTextBoxColumn
-            // 
-            versionIdDataGridViewTextBoxColumn.DataPropertyName = "VersionId";
-            versionIdDataGridViewTextBoxColumn.HeaderText = "VersionId";
-            versionIdDataGridViewTextBoxColumn.Name = "versionIdDataGridViewTextBoxColumn";
-            versionIdDataGridViewTextBoxColumn.ReadOnly = true;
-            versionIdDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // storageIdDataGridViewTextBoxColumn1
-            // 
-            storageIdDataGridViewTextBoxColumn1.DataPropertyName = "StorageId";
-            storageIdDataGridViewTextBoxColumn1.HeaderText = "StorageId";
-            storageIdDataGridViewTextBoxColumn1.Name = "storageIdDataGridViewTextBoxColumn1";
-            storageIdDataGridViewTextBoxColumn1.ReadOnly = true;
-            storageIdDataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // protocolTypeDataGridViewTextBoxColumn1
-            // 
-            protocolTypeDataGridViewTextBoxColumn1.DataPropertyName = "ProtocolType";
-            protocolTypeDataGridViewTextBoxColumn1.HeaderText = "Protocol Type";
-            protocolTypeDataGridViewTextBoxColumn1.MinimumWidth = 50;
-            protocolTypeDataGridViewTextBoxColumn1.Name = "protocolTypeDataGridViewTextBoxColumn1";
-            protocolTypeDataGridViewTextBoxColumn1.ReadOnly = true;
-            protocolTypeDataGridViewTextBoxColumn1.Visible = false;
-            protocolTypeDataGridViewTextBoxColumn1.Width = 50;
-            // 
-            // versionDataGridViewTextBoxColumn
-            // 
-            versionDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            versionDataGridViewTextBoxColumn.DataPropertyName = "Version";
-            versionDataGridViewTextBoxColumn.HeaderText = "Version";
-            versionDataGridViewTextBoxColumn.Name = "versionDataGridViewTextBoxColumn";
-            versionDataGridViewTextBoxColumn.ReadOnly = true;
-            versionDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // isLatestDataGridViewCheckBoxColumn
-            // 
-            isLatestDataGridViewCheckBoxColumn.DataPropertyName = "IsLatest";
-            isLatestDataGridViewCheckBoxColumn.HeaderText = "Latest";
-            isLatestDataGridViewCheckBoxColumn.Name = "isLatestDataGridViewCheckBoxColumn";
-            isLatestDataGridViewCheckBoxColumn.ReadOnly = true;
-            isLatestDataGridViewCheckBoxColumn.Width = 44;
-            // 
-            // isOfficialReleaseDataGridViewCheckBoxColumn
-            // 
-            isOfficialReleaseDataGridViewCheckBoxColumn.DataPropertyName = "IsOfficialRelease";
-            isOfficialReleaseDataGridViewCheckBoxColumn.HeaderText = "Official";
-            isOfficialReleaseDataGridViewCheckBoxColumn.Name = "isOfficialReleaseDataGridViewCheckBoxColumn";
-            isOfficialReleaseDataGridViewCheckBoxColumn.ReadOnly = true;
-            isOfficialReleaseDataGridViewCheckBoxColumn.Width = 51;
-            // 
-            // isPreReleaseDataGridViewCheckBoxColumn
-            // 
-            isPreReleaseDataGridViewCheckBoxColumn.DataPropertyName = "IsPreRelease";
-            isPreReleaseDataGridViewCheckBoxColumn.HeaderText = "Pre-Release";
-            isPreReleaseDataGridViewCheckBoxColumn.Name = "isPreReleaseDataGridViewCheckBoxColumn";
-            isPreReleaseDataGridViewCheckBoxColumn.ReadOnly = true;
-            isPreReleaseDataGridViewCheckBoxColumn.Width = 74;
-            // 
-            // isListedDataGridViewCheckBoxColumn
-            // 
-            isListedDataGridViewCheckBoxColumn.DataPropertyName = "IsListed";
-            isListedDataGridViewCheckBoxColumn.HeaderText = "Listed";
-            isListedDataGridViewCheckBoxColumn.Name = "isListedDataGridViewCheckBoxColumn";
-            isListedDataGridViewCheckBoxColumn.ReadOnly = true;
-            isListedDataGridViewCheckBoxColumn.Width = 44;
-            // 
-            // IsUnlisted
-            // 
-            IsUnlisted.DataPropertyName = "IsUnlisted";
-            IsUnlisted.HeaderText = "Unlisted";
-            IsUnlisted.Name = "IsUnlisted";
-            IsUnlisted.ReadOnly = true;
-            IsUnlisted.Width = 56;
-            // 
-            // publishDateDataGridViewTextBoxColumn
-            // 
-            publishDateDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            publishDateDataGridViewTextBoxColumn.DataPropertyName = "PublishDate";
-            publishDateDataGridViewTextBoxColumn.HeaderText = "Publish Date";
-            publishDateDataGridViewTextBoxColumn.Name = "publishDateDataGridViewTextBoxColumn";
-            publishDateDataGridViewTextBoxColumn.ReadOnly = true;
-            publishDateDataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // idDataGridViewTextBoxColumn1
-            // 
-            idDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            idDataGridViewTextBoxColumn1.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn1.HeaderText = "Id";
-            idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
-            idDataGridViewTextBoxColumn1.ReadOnly = true;
-            idDataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // storageIdDataGridViewTextBoxColumn
-            // 
-            storageIdDataGridViewTextBoxColumn.DataPropertyName = "StorageId";
-            storageIdDataGridViewTextBoxColumn.HeaderText = "StorageId";
-            storageIdDataGridViewTextBoxColumn.Name = "storageIdDataGridViewTextBoxColumn";
-            storageIdDataGridViewTextBoxColumn.ReadOnly = true;
-            storageIdDataGridViewTextBoxColumn.Visible = false;
-            storageIdDataGridViewTextBoxColumn.Width = 82;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -963,9 +1013,11 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             packagesGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxFilterPackages).EndInit();
             horizontalSplitContainer.Panel1.ResumeLayout(false);
+            horizontalSplitContainer.Panel1.PerformLayout();
             horizontalSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)horizontalSplitContainer).EndInit();
             horizontalSplitContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBoxFilterVersions).EndInit();
             sameVersionGroupBox.ResumeLayout(false);
             sameVersionGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxFilterPackagesVersions).EndInit();
@@ -1064,5 +1116,9 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
         private DataGridViewTextBoxColumn versionIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn storageIdDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn protocolTypeDataGridViewTextBoxColumn1;
+        private PictureBox pictureBoxFilterVersions;
+        private Button btnCleanFilterVersions;
+        private TextBox tbFilterVersions;
+        private Label lblFilterVersions;
     }
 }
