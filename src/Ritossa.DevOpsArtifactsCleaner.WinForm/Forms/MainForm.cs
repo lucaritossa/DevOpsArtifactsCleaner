@@ -244,6 +244,66 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
                 horizontalSplitContainer.SplitterDistance = _userSettings.MainForm.HorizontalSplitterDefaultDistance;
         }
 
+        private async void deleteAllOlderPackagesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var oldVersionsToDelete = _allPackageVersions.Where(model => !model.IsLatest).OrderBy(model => model.Name).ToList();
+
+                if (oldVersionsToDelete.Count <= 0)
+                {
+                    MessageBox.Show("No old packages found", "Info", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    return;
+                }
+
+                var dialog = MessageBox.Show(
+                    $"This will delete ALL old package versions. Are you sure you want to send {oldVersionsToDelete.Count} package versions to the feed's Recycle Bin?\n\n" +
+                    "This is disruptive. Any project that relies on selected versions will be unable to build.",
+                    "Please confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+
+                if (dialog != DialogResult.Yes)
+                    return;
+
+                toolStripProgressBar.ProgressBar.Show();
+
+                var progress = new Progress<string>(message => toolStripStatusLabel.Text = message);
+
+                var isSuccessful = false;
+                await Task.Run(() =>
+                {
+                    var chunks = SplitIntoChunks(oldVersionsToDelete);
+
+                    foreach (var chunk in chunks)
+                    {
+                        isSuccessful = _devOpsService.DeletePackageVersions(_userSettings, chunk, progress);
+
+                        if (isSuccessful == false)
+                            break;
+                    }
+                });
+
+                if (!isSuccessful)
+                {
+                    toolStripProgressBar.ProgressBar.Hide();
+                    var message = toolStripStatusLabel.Text;
+                    toolStripStatusLabel.Text = string.Empty;
+
+                    MessageBox.Show($"Deleting failed\n\n{message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                MessageBox.Show($"{oldVersionsToDelete.Count} versions deleted", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                toolStripStatusLabel.Text = string.Empty;
+            }
+            finally
+            {
+                ResumeLayout();
+
+                toolStripProgressBar.ProgressBar.Hide();
+            }
+        }
+
         #endregion
 
         #region Main Buttons events
@@ -657,6 +717,5 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             if (sender is not PictureBox pictureBox) return;
             toolTipFilterIsActive.Hide(pictureBox);
         }
-
     }
 }
