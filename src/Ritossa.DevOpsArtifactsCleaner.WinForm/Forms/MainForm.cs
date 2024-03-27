@@ -248,7 +248,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
         {
             try
             {
-                var oldVersionsToDelete = _allPackageVersions.Where(model => !model.IsLatest).OrderBy(model => model.Name).ToList();
+                var oldVersionsToDelete = _allPackageVersions.Where(model => !model.IsLatest).ToList();
 
                 if (oldVersionsToDelete.Count <= 0)
                 {
