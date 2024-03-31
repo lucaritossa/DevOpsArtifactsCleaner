@@ -9,8 +9,6 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
 {
     public partial class MainForm : Form
     {
-        #region Private Fields
-
         private readonly IDevOpsService _devOpsService;
         private readonly IUserSettingsService _userSettingsService;
         private readonly OptionsForm _optionsForm;
@@ -21,10 +19,6 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
 
         private const string FILTERED_LIST_MESSAGE = "You are seeing a filtered list";
 
-        #endregion
-
-        #region Constructors
-
         public MainForm(OptionsForm optionsForm, IUserSettingsService userSettingsService, IDevOpsService devOpsService)
         {
             _optionsForm = optionsForm;
@@ -33,8 +27,6 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
 
             InitializeComponent();
         }
-
-        #endregion
 
         #region Common Methods
 
@@ -166,6 +158,18 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             }
 
             return result;
+        }
+
+        private void pictureBoxFilter_MouseHover(object sender, EventArgs e)
+        {
+            if (sender is not PictureBox pictureBox) return;
+            toolTipFilterIsActive.Show(FILTERED_LIST_MESSAGE, pictureBox, 1, -75);
+        }
+
+        private void pictureBoxFilter_MouseLeave(object sender, EventArgs e)
+        {
+            if (sender is not PictureBox pictureBox) return;
+            toolTipFilterIsActive.Hide(pictureBox);
         }
 
         #endregion
@@ -577,8 +581,11 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
 
         private void tbFilterPackages_TextChanged(object sender, EventArgs e)
         {
-            pictureBoxFilterPackages.Visible = !string.IsNullOrWhiteSpace(tbFilterPackages.Text);
-            FilterMasterDataSource();
+            Task.Delay(500).ContinueWith(_ =>
+            {
+                pictureBoxFilterPackages.Visible = !string.IsNullOrWhiteSpace(tbFilterPackages.Text);
+                FilterMasterDataSource();
+            }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         private void btnClearFilterPackages_Click(object sender, EventArgs e)
@@ -668,8 +675,11 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
 
         private void tbFilterVersions_TextChanged(object sender, EventArgs e)
         {
-            pictureBoxFilterVersions.Visible = !string.IsNullOrWhiteSpace(tbFilterVersions.Text);
-            FilterDetailsDataSource();
+            Task.Delay(500).ContinueWith(_ =>
+            {
+                pictureBoxFilterVersions.Visible = !string.IsNullOrWhiteSpace(tbFilterVersions.Text);
+                FilterDetailsDataSource();
+            }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         private void btnClearFilterVersions_Click(object sender, EventArgs e)
@@ -683,8 +693,11 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
 
         private void tbFilterPackagesVersions_TextChanged(object sender, EventArgs e)
         {
-            pictureBoxFilterPackagesVersions.Visible = !string.IsNullOrWhiteSpace(tbFilterPackagesVersions.Text);
-            FilterPackagesVersionsDataSource();
+            Task.Delay(500).ContinueWith(_ =>
+            {
+                pictureBoxFilterPackagesVersions.Visible = !string.IsNullOrWhiteSpace(tbFilterPackagesVersions.Text);
+                FilterPackagesVersionsDataSource();
+            }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         private void btnClearFilterPackagesVersions_Click(object sender, EventArgs e)
@@ -706,16 +719,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
 
         #endregion
 
-        private void pictureBoxFilter_MouseHover(object sender, EventArgs e)
-        {
-            if (sender is not PictureBox pictureBox) return;
-            toolTipFilterIsActive.Show(FILTERED_LIST_MESSAGE, pictureBox, 1, -75);
-        }
 
-        private void pictureBoxFilter_MouseLeave(object sender, EventArgs e)
-        {
-            if (sender is not PictureBox pictureBox) return;
-            toolTipFilterIsActive.Hide(pictureBox);
-        }
+
     }
 }
