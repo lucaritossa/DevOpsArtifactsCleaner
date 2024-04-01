@@ -113,6 +113,8 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             resetLayoutToolStripMenuItem = new ToolStripMenuItem();
             toolsToolStripMenuItem = new ToolStripMenuItem();
             optionsToolStripMenuItem = new ToolStripMenuItem();
+            massiveOpsToolStripMenuItem = new ToolStripMenuItem();
+            deleteAllOlderPackagesToolStripMenuItem = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
             parametersGroupBox.SuspendLayout();
@@ -956,7 +958,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             // 
             // toolsToolStripMenuItem
             // 
-            toolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { optionsToolStripMenuItem });
+            toolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { optionsToolStripMenuItem, massiveOpsToolStripMenuItem });
             toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             toolsToolStripMenuItem.Size = new Size(46, 20);
             toolsToolStripMenuItem.Text = "&Tools";
@@ -964,9 +966,23 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             // optionsToolStripMenuItem
             // 
             optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            optionsToolStripMenuItem.Size = new Size(116, 22);
+            optionsToolStripMenuItem.Size = new Size(180, 22);
             optionsToolStripMenuItem.Text = "&Options";
             optionsToolStripMenuItem.Click += optionsToolStripMenuItem_Click;
+            // 
+            // massiveOpsToolStripMenuItem
+            // 
+            massiveOpsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { deleteAllOlderPackagesToolStripMenuItem });
+            massiveOpsToolStripMenuItem.Name = "massiveOpsToolStripMenuItem";
+            massiveOpsToolStripMenuItem.Size = new Size(180, 22);
+            massiveOpsToolStripMenuItem.Text = "&Massive Ops";
+            // 
+            // deleteAllOlderPackagesToolStripMenuItem
+            // 
+            deleteAllOlderPackagesToolStripMenuItem.Name = "deleteAllOlderPackagesToolStripMenuItem";
+            deleteAllOlderPackagesToolStripMenuItem.Size = new Size(212, 22);
+            deleteAllOlderPackagesToolStripMenuItem.Text = "&Delete ALL older packages";
+            deleteAllOlderPackagesToolStripMenuItem.Click += deleteAllOlderPackagesToolStripMenuItem_Click;
             // 
             // helpToolStripMenuItem
             // 
@@ -1120,5 +1136,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
         private Button btnCleanFilterVersions;
         private TextBox tbFilterVersions;
         private Label lblFilterVersions;
+        private ToolStripMenuItem massiveOpsToolStripMenuItem;
+        private ToolStripMenuItem deleteAllOlderPackagesToolStripMenuItem;
     }
 }
