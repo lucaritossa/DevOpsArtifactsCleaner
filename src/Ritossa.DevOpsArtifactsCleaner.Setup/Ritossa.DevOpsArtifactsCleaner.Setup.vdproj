@@ -33,7 +33,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:Debug\\Ritossa.DevOpsArtifactsCleaner.Setup.msi"
+        "OutputFilename" = "8:Debug\\DevOpsArtifactsCleaner.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -65,7 +65,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\Ritossa.DevOpsArtifactsCleaner.Setup.msi"
+        "OutputFilename" = "8:Release\\DevOpsArtifactsCleaner.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -748,7 +748,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_D508837C5ECA4D61889663810130FA79"
             {
-            "SourcePath" = "8:..\\Ritossa.DevOpsArtifactsCleaner.WinForm\\obj\\Debug\\net8.0-windows\\apphost.exe"
+            "SourcePath" = "8:..\\Ritossa.DevOpsArtifactsCleaner.WinForm\\obj\\Release\\net8.0-windows\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_FB797C06664A4391949A83D9BABE4C83"
