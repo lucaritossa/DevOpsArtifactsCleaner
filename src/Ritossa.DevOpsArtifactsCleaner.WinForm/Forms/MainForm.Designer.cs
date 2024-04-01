@@ -113,9 +113,10 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             resetLayoutToolStripMenuItem = new ToolStripMenuItem();
             toolsToolStripMenuItem = new ToolStripMenuItem();
             optionsToolStripMenuItem = new ToolStripMenuItem();
+            massiveOpsToolStripMenuItem = new ToolStripMenuItem();
+            deleteAllOlderPackagesToolStripMenuItem = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
-            deleteAllOlderPackagesToolStripMenuItem = new ToolStripMenuItem();
             parametersGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)masterDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)masterBindingSource).BeginInit();
@@ -951,13 +952,13 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             // resetLayoutToolStripMenuItem
             // 
             resetLayoutToolStripMenuItem.Name = "resetLayoutToolStripMenuItem";
-            resetLayoutToolStripMenuItem.Size = new Size(180, 22);
+            resetLayoutToolStripMenuItem.Size = new Size(141, 22);
             resetLayoutToolStripMenuItem.Text = "&Reset Layout";
             resetLayoutToolStripMenuItem.Click += resetLayoutToolStripMenuItem_Click;
             // 
             // toolsToolStripMenuItem
             // 
-            toolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { optionsToolStripMenuItem, deleteAllOlderPackagesToolStripMenuItem });
+            toolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { optionsToolStripMenuItem, massiveOpsToolStripMenuItem });
             toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             toolsToolStripMenuItem.Size = new Size(46, 20);
             toolsToolStripMenuItem.Text = "&Tools";
@@ -965,9 +966,23 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             // optionsToolStripMenuItem
             // 
             optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            optionsToolStripMenuItem.Size = new Size(204, 22);
+            optionsToolStripMenuItem.Size = new Size(180, 22);
             optionsToolStripMenuItem.Text = "&Options";
             optionsToolStripMenuItem.Click += optionsToolStripMenuItem_Click;
+            // 
+            // massiveOpsToolStripMenuItem
+            // 
+            massiveOpsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { deleteAllOlderPackagesToolStripMenuItem });
+            massiveOpsToolStripMenuItem.Name = "massiveOpsToolStripMenuItem";
+            massiveOpsToolStripMenuItem.Size = new Size(180, 22);
+            massiveOpsToolStripMenuItem.Text = "&Massive Ops";
+            // 
+            // deleteAllOlderPackagesToolStripMenuItem
+            // 
+            deleteAllOlderPackagesToolStripMenuItem.Name = "deleteAllOlderPackagesToolStripMenuItem";
+            deleteAllOlderPackagesToolStripMenuItem.Size = new Size(212, 22);
+            deleteAllOlderPackagesToolStripMenuItem.Text = "&Delete ALL older packages";
+            deleteAllOlderPackagesToolStripMenuItem.Click += deleteAllOlderPackagesToolStripMenuItem_Click;
             // 
             // helpToolStripMenuItem
             // 
@@ -982,13 +997,6 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
             aboutToolStripMenuItem.Size = new Size(107, 22);
             aboutToolStripMenuItem.Text = "About";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
-            // 
-            // deleteAllOlderPackagesToolStripMenuItem
-            // 
-            deleteAllOlderPackagesToolStripMenuItem.Name = "deleteAllOlderPackagesToolStripMenuItem";
-            deleteAllOlderPackagesToolStripMenuItem.Size = new Size(204, 22);
-            deleteAllOlderPackagesToolStripMenuItem.Text = "Delete all older packages";
-            deleteAllOlderPackagesToolStripMenuItem.Click += deleteAllOlderPackagesToolStripMenuItem_Click;
             // 
             // MainForm
             // 
@@ -1128,6 +1136,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
         private Button btnCleanFilterVersions;
         private TextBox tbFilterVersions;
         private Label lblFilterVersions;
+        private ToolStripMenuItem massiveOpsToolStripMenuItem;
         private ToolStripMenuItem deleteAllOlderPackagesToolStripMenuItem;
     }
 }
