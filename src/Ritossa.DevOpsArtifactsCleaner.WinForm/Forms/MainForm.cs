@@ -262,7 +262,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
                 }
 
                 var dialog = MessageBox.Show(
-                    $"This will delete ALL old package versions. Are you sure you want to send {oldVersionsToDelete.Count} package versions to the feed's Recycle Bin?\n\n" +
+                    $"This will delete ALL old versions of ALL packages. Are you sure you want to send {oldVersionsToDelete.Count} package versions to the feed's Recycle Bin?\n\n" +
                     "This is disruptive. Any project that relies on selected versions will be unable to build.",
                     "Please confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
 
@@ -718,8 +718,6 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
         }
 
         #endregion
-
-
 
     }
 }
