@@ -34,7 +34,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.Services
             return true;
         }
 
-        public List<PackageModel> GetAllPackages(UserSettingsModel settings, IProgress<string> progress)
+        public List<PackageModel> GetAllPackages(UserSettingsModel settings, IProgress<string> progress, int skip)
         {
             var parameters = new GetAllPackagesParams
             {
@@ -43,7 +43,8 @@ namespace Ritossa.DevOpsArtifactsCleaner.Services
                 Project = settings.Project,
                 FeedId = settings.FeedId,
                 ProtocolType = settings.ProtocolType,
-                IncludeAllVersions = settings.IncludeAllVersions
+                IncludeAllVersions = settings.IncludeAllVersions,
+                Skip = skip
             };
 
             progress.Report("Getting packages...");
