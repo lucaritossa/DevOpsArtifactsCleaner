@@ -108,7 +108,22 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
 
                 var progress = new Progress<string>(message => toolStripStatusLabel.Text = message);
 
-                await Task.Run(() => _allPackages = _devOpsService.GetAllPackages(_userSettings, progress));
+                await Task.Run(() =>
+                {
+                    var tmpPackages = _devOpsService.GetAllPackages(_userSettings, progress, 0);
+                    
+                    // The azure API will return up to 1000 packages per API call
+                    // The following code will fetch up to 5000 packages
+                    int skip = 1000;
+                    while (tmpPackages.Count % 1000 == 0 && skip < 6000)
+                    {
+                        var t = _devOpsService.GetAllPackages(_userSettings, progress, skip);
+                        tmpPackages.AddRange(t);
+                        skip += 1000;
+                    }
+
+                    _allPackages = tmpPackages;
+                });
 
                 if (_allPackages.Count <= 0)
                 {

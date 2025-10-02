@@ -1,5 +1,8 @@
-﻿namespace Ritossa.DevOpsArtifactsCleaner.Services.Contracts.Models
+﻿using System.Diagnostics;
+
+namespace Ritossa.DevOpsArtifactsCleaner.Services.Contracts.Models
 {
+    [DebuggerDisplay("{Name}")]
     public class PackageModel
     {
         public string Id { get; set; }

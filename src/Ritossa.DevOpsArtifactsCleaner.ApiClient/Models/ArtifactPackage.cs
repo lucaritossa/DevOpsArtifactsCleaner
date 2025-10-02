@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace Ritossa.DevOpsArtifactsCleaner.ApiClient.Models;
 
+[DebuggerDisplay("{Name}")]
 public class ArtifactPackage
 {
     [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
