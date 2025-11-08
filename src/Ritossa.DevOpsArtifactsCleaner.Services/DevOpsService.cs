@@ -34,7 +34,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.Services
             return true;
         }
 
-        public List<PackageModel> GetAllPackages(UserSettingsModel settings, IProgress<string> progress)
+        public async Task<List<PackageModel>> GetAllPackagesAsync(UserSettingsModel settings, IProgress<string> progress)
         {
             var parameters = new GetAllPackagesParams
             {
@@ -48,7 +48,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.Services
 
             progress.Report("Getting packages...");
 
-            var response = _devOpsArtifactsApiClient.GetAllPackages(parameters);
+            var response = await _devOpsArtifactsApiClient.GetAllPackagesAsync(parameters).ConfigureAwait(false);
 
             if (Exit_WhenError(response, progress)) return new();
 
@@ -71,7 +71,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.Services
             return response.Data.Value.ToModel();
         }
 
-        public bool UnlistVersions(UserSettingsModel settings, List<PackageVersionModel> toUnlist, IProgress<string> progress)
+        public async Task<bool> UnlistVersionsAsync(UserSettingsModel settings, List<PackageVersionModel> toUnlist, IProgress<string> progress)
         {
             var parameters = new UnlistNugetPackageVersionParams
             {
@@ -84,7 +84,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.Services
 
             progress.Report("Unlisting selected versions...");
 
-            var response = _devOpsArtifactsApiClient.UnlistNugetPackageVersion(parameters);
+            var response = await _devOpsArtifactsApiClient.UnlistNugetPackageVersionAsync(parameters).ConfigureAwait(false);
 
             if (Exit_WhenError(response, progress))
                 return false;
@@ -93,7 +93,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.Services
             return true;
         }
 
-        public bool RelistVersions(UserSettingsModel settings, List<PackageVersionModel> toRelist, IProgress<string> progress)
+        public async Task<bool> RelistVersionsAsync(UserSettingsModel settings, List<PackageVersionModel> toRelist, IProgress<string> progress)
         {
             var parameters = new RelistNugetPackageVersionParams
             {
@@ -105,7 +105,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.Services
             };
 
             progress.Report("Relisting selected versions...");
-            var response = _devOpsArtifactsApiClient.RelistNugetPackageVersion(parameters);
+            var response = await _devOpsArtifactsApiClient.RelistNugetPackageVersionAsync(parameters).ConfigureAwait(false);
 
             if (Exit_WhenError(response, progress))
                 return false;
@@ -116,7 +116,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.Services
         }
 
 
-        public bool DeletePackageVersions(UserSettingsModel settings, List<PackageVersionModel> toDelete, IProgress<string> progress)
+        public async Task<bool> DeletePackageVersionsAsync(UserSettingsModel settings, List<PackageVersionModel> toDelete, IProgress<string> progress)
         {
             var parameters = new DeleteNugetPackageVersionParams
             {
@@ -129,7 +129,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.Services
 
             progress.Report("Deleting selected versions...");
 
-            var response = _devOpsArtifactsApiClient.DeleteNugetPackageVersion(parameters);
+            var response = await _devOpsArtifactsApiClient.DeleteNugetPackageVersionAsync(parameters).ConfigureAwait(false);
 
             if (Exit_WhenError(response, progress))
                 return false;
@@ -167,7 +167,16 @@ namespace Ritossa.DevOpsArtifactsCleaner.Services
         private bool Exit_WhenError(RestResponseBase response, IProgress<string> progress)
         {
             if (response.IsSuccessful)
+            {
+                if (response.ContentType != null && !response.ContentType.Contains("application/json"))
+                {
+                    progress.Report($"Unexpected response with content type [{response.ContentType}] and status code [{response.StatusCode}]");
+                    return true;
+                }
+
                 return false;
+
+            }
 
             switch (response.StatusCode)
             {

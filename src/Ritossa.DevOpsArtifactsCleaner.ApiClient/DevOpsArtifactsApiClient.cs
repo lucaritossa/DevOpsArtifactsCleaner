@@ -37,7 +37,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.ApiClient
 
         public RestResponse TestConnection(BaseParams parameters)
         {
-            var organizationAndProject = 
+            var organizationAndProject =
                 GetOrganizationAndProjectSegmentUrl(parameters.Organization, parameters.Project);
 
             var request =
@@ -55,7 +55,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.ApiClient
             return response;
         }
 
-        public RestResponse<GetAllPackagesResult> GetAllPackages(GetAllPackagesParams parameters)
+        public async Task<RestResponse<GetAllPackagesResult>> GetAllPackagesAsync(GetAllPackagesParams parameters)
         {
             var organizationAndProject =
                 GetOrganizationAndProjectSegmentUrl(parameters.Organization, parameters.Project);
@@ -69,12 +69,12 @@ namespace Ritossa.DevOpsArtifactsCleaner.ApiClient
                     .AddParameter("api-version", _apiVersion)
                     .AddAuthorization(parameters.Pat);
 
-            var response = _client.Execute<GetAllPackagesResult>(request);
+            var response = await _client.ExecuteAsync<GetAllPackagesResult>(request).ConfigureAwait(false);
 
             return response;
         }
 
-        public RestResponse DeleteNugetPackageVersion(DeleteNugetPackageVersionParams parameters)
+        public async Task<RestResponse> DeleteNugetPackageVersionAsync(DeleteNugetPackageVersionParams parameters)
         {
             var organizationAndProject = GetOrganizationAndProjectSegmentUrl(parameters.Organization, parameters.Project);
 
@@ -96,11 +96,11 @@ namespace Ritossa.DevOpsArtifactsCleaner.ApiClient
 
             request.AddBody(JsonConvert.SerializeObject(body, _serializerSettings), contentType: ContentType.Json);
 
-            var response = _client.Execute(request);
+            var response = await _client.ExecuteAsync(request).ConfigureAwait(false);
             return response;
         }
 
-        public RestResponse UnlistNugetPackageVersion(UnlistNugetPackageVersionParams parameters)
+        public async Task<RestResponse> UnlistNugetPackageVersionAsync(UnlistNugetPackageVersionParams parameters)
         {
             var organizationAndProject = GetOrganizationAndProjectSegmentUrl(parameters.Organization, parameters.Project);
 
@@ -127,11 +127,11 @@ namespace Ritossa.DevOpsArtifactsCleaner.ApiClient
 
             request.AddBody(JsonConvert.SerializeObject(body, _serializerSettings), contentType: ContentType.Json);
 
-            var response = _client.Execute(request);
+            var response = await _client.ExecuteAsync(request).ConfigureAwait(false);
             return response;
         }
 
-        public RestResponse RelistNugetPackageVersion(RelistNugetPackageVersionParams parameters)
+        public async Task<RestResponse> RelistNugetPackageVersionAsync(RelistNugetPackageVersionParams parameters)
         {
             var organizationAndProject = GetOrganizationAndProjectSegmentUrl(parameters.Organization, parameters.Project);
 
@@ -158,11 +158,11 @@ namespace Ritossa.DevOpsArtifactsCleaner.ApiClient
 
             request.AddBody(JsonConvert.SerializeObject(body, _serializerSettings), contentType: ContentType.Json);
 
-            var response = _client.Execute(request);
+            var response = await _client.ExecuteAsync(request).ConfigureAwait(false);
             return response;
         }
 
-        private string GetOrganizationAndProjectSegmentUrl(string organization, string project)
+        private string GetOrganizationAndProjectSegmentUrl(string organization, string? project)
         {
             if (string.IsNullOrWhiteSpace(project))
                 return organization;

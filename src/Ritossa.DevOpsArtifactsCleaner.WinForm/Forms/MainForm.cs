@@ -108,7 +108,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
 
                 var progress = new Progress<string>(message => toolStripStatusLabel.Text = message);
 
-                await Task.Run(() => _allPackages = _devOpsService.GetAllPackages(_userSettings, progress));
+                _allPackages = await _devOpsService.GetAllPackagesAsync(_userSettings, progress);
 
                 if (_allPackages.Count <= 0)
                 {
@@ -273,19 +273,16 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
 
                 var progress = new Progress<string>(message => toolStripStatusLabel.Text = message);
 
-                var isSuccessful = false;
-                await Task.Run(() =>
+                var isSuccessful = true;
+                var chunks = SplitIntoChunks(oldVersionsToDelete);
+
+                foreach (var chunk in chunks)
                 {
-                    var chunks = SplitIntoChunks(oldVersionsToDelete);
+                    isSuccessful = await _devOpsService.DeletePackageVersionsAsync(_userSettings, chunk, progress);
 
-                    foreach (var chunk in chunks)
-                    {
-                        isSuccessful = _devOpsService.DeletePackageVersions(_userSettings, chunk, progress);
-
-                        if (isSuccessful == false)
-                            break;
-                    }
-                });
+                    if (isSuccessful == false)
+                        break;
+                }
 
                 if (!isSuccessful)
                 {
@@ -342,20 +339,16 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
 
                 var progress = new Progress<string>(message => toolStripStatusLabel.Text = message);
 
-                var isSuccessful = false;
-                await Task.Run(() =>
+                var isSuccessful = true;
+                var chunks = SplitIntoChunks(toDelete);
+
+                foreach (var chunk in chunks)
                 {
-                    var chunks = SplitIntoChunks(toDelete);
+                    isSuccessful = await _devOpsService.DeletePackageVersionsAsync(_userSettings, chunk, progress);
 
-                    foreach (var chunk in chunks)
-                    {
-                        isSuccessful = _devOpsService.DeletePackageVersions(_userSettings, chunk, progress);
-
-                        if (isSuccessful == false)
-                            break;
-                    }
-                });
-
+                    if (isSuccessful == false)
+                        break;
+                }
 
                 if (!isSuccessful)
                 {
@@ -399,19 +392,16 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
 
                 var progress = new Progress<string>(message => toolStripStatusLabel.Text = message);
 
-                var isSuccessful = false;
-                await Task.Run(() =>
+                var isSuccessful = true;
+                var chunks = SplitIntoChunks(toUnlist);
+
+                foreach (var chunk in chunks)
                 {
-                    var chunks = SplitIntoChunks(toUnlist);
+                    isSuccessful = await _devOpsService.UnlistVersionsAsync(_userSettings, chunk, progress);
 
-                    foreach (var chunk in chunks)
-                    {
-                        isSuccessful = _devOpsService.UnlistVersions(_userSettings, chunk, progress);
-
-                        if (isSuccessful == false)
-                            break;
-                    }
-                });
+                    if (isSuccessful == false)
+                        break;
+                }
 
                 if (!isSuccessful)
                 {
@@ -475,19 +465,16 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
 
                 var progress = new Progress<string>(message => toolStripStatusLabel.Text = message);
 
-                var isSuccessful = false;
-                await Task.Run(() =>
+                var isSuccessful = true;
+                var chunks = SplitIntoChunks(toRelist);
+
+                foreach (var chunk in chunks)
                 {
-                    var chunks = SplitIntoChunks(toRelist);
+                    isSuccessful = await _devOpsService.RelistVersionsAsync(_userSettings, chunk, progress);
 
-                    foreach (var chunk in chunks)
-                    {
-                        isSuccessful = _devOpsService.RelistVersions(_userSettings, toRelist, progress);
-
-                        if (isSuccessful == false)
-                            break;
-                    }
-                });
+                    if (isSuccessful == false)
+                        break;
+                }
 
                 if (!isSuccessful)
                 {
@@ -499,7 +486,7 @@ namespace Ritossa.DevOpsArtifactsCleaner.WinForm.Forms
                     return;
                 }
 
-                MessageBox.Show($"{toRelist.Count} versions deleted", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"{toRelist.Count} versions relisted", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 toolStripStatusLabel.Text = string.Empty;
 
                 SuspendLayout();
