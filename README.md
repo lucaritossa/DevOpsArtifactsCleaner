@@ -1,3 +1,5 @@
+![logo](/src/Ritossa.DevOpsArtifactsCleaner.WinForm/Resources/icon-128x128.png)
+
 # DevOps Artifacts Cleaner
 - Do you have an Azure DevOps Organization?
 - Are you using Artifacts feature to store your NUGET packages?
