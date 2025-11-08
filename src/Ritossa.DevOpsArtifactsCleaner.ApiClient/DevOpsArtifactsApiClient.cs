@@ -69,6 +69,16 @@ namespace Ritossa.DevOpsArtifactsCleaner.ApiClient
                     .AddParameter("api-version", _apiVersion)
                     .AddAuthorization(parameters.Pat);
 
+            if (parameters.Skip.HasValue && parameters.Skip.Value > 0)
+            {
+                request.AddParameter("$skip", parameters.Skip.Value);
+            }
+
+            if (parameters.Top.HasValue && parameters.Top.Value > 0)
+            {
+                request.AddParameter("$top", parameters.Top.Value);
+            }
+
             var response = await _client.ExecuteAsync<GetAllPackagesResult>(request).ConfigureAwait(false);
 
             return response;

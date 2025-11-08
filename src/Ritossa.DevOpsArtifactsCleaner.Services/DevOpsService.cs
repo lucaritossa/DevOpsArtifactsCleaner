@@ -36,39 +36,69 @@ namespace Ritossa.DevOpsArtifactsCleaner.Services
 
         public async Task<List<PackageModel>> GetAllPackagesAsync(UserSettingsModel settings, IProgress<string> progress)
         {
-            var parameters = new GetAllPackagesParams
-            {
-                Pat = settings.Pat,
-                Organization = settings.Organization,
-                Project = settings.Project,
-                FeedId = settings.FeedId,
-                ProtocolType = settings.ProtocolType,
-                IncludeAllVersions = settings.IncludeAllVersions
-            };
+            const int pageSize = 1000;
+            var allPackages = new List<ApiClient.Models.ArtifactPackage>();
+            var skip = 0;
+            var hasMoreResults = true;
 
             progress.Report("Getting packages...");
 
-            var response = await _devOpsArtifactsApiClient.GetAllPackagesAsync(parameters).ConfigureAwait(false);
-
-            if (Exit_WhenError(response, progress)) return new();
-
-            if (response.Data.Count == 0)
+            while (hasMoreResults)
             {
-                progress.Report("No packages found");
-                return new List<PackageModel>();
+                var parameters = new GetAllPackagesParams
+                {
+                    Pat = settings.Pat,
+                    Organization = settings.Organization,
+                    Project = settings.Project,
+                    FeedId = settings.FeedId,
+                    ProtocolType = settings.ProtocolType,
+                    IncludeAllVersions = settings.IncludeAllVersions,
+                    Top = pageSize,
+                    Skip = skip
+                };
+
+                var response = await _devOpsArtifactsApiClient.GetAllPackagesAsync(parameters).ConfigureAwait(false);
+
+                if (Exit_WhenError(response, progress))
+                {
+                    return new();
+                }
+
+                if (response.Data.Count == 0)
+                {
+                    hasMoreResults = false;
+                }
+                else
+                {
+                    allPackages.AddRange(response.Data.Value);
+                    skip += response.Data.Count;
+
+                    progress.Report($"Retrieved {allPackages.Count} packages so far...");
+
+                    if (response.Data.Count < pageSize)
+                    {
+                        hasMoreResults = false;
+                    }
+                }
             }
 
-            response.Data.Value = response.Data.Value.OrderBy(_ => _.Name).ToList();
+            if (allPackages.Count == 0)
+            {
+                progress.Report("No packages found");
+                return [];
+            }
 
-            response.Data.Value.ForEach(_ =>
+            allPackages = [.. allPackages.OrderBy(_ => _.Name)];
+
+            allPackages.ForEach(_ =>
                 _.Versions = _.Versions
                     .OrderByDescending(v => v.IsLatest)
                     .ThenByDescending(v => v.Version)
                     .ToList());
 
-            progress.Report($"{response.Data.Count} packages found");
+            progress.Report($"{allPackages.Count} packages found");
 
-            return response.Data.Value.ToModel();
+            return allPackages.ToModel();
         }
 
         public async Task<bool> UnlistVersionsAsync(UserSettingsModel settings, List<PackageVersionModel> toUnlist, IProgress<string> progress)
